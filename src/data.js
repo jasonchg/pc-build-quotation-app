@@ -98,8 +98,8 @@ export const memories = [
     id: 10,
     name: 'Corsair Vengeance LPX 16GB',
     speed: 3200,
-    slot: 'DDR4',
-    qty: 2,
+    formFactor: 'DDR4',
+    quantity: 2,
     stickSize: 6,
     price: 120,
   },
@@ -107,8 +107,8 @@ export const memories = [
     id: 11,
     name: 'G.Skill Ripjaws V 16GB',
     speed: 3200,
-    slot: 'DDR4',
-    qty: 2,
+    formFactor: 'DDR4',
+    quantity: 2,
     stickSize: 6,
     price: 240,
   },
@@ -187,5 +187,22 @@ export const powerSupplies = [
     watt: 750,
     modular: 'full',
     price: 500,
+  },
+]
+
+export const casings = [
+  {
+    id: 20,
+    name: 'NZXT H510',
+    type: 'ATX Mid Tower',
+    color: 'White',
+    price: 180,
+  },
+  {
+    id: 22,
+    name: 'Corsair 275R Airflow',
+    type: 'ATX Mid Tower',
+    color: 'Black',
+    price: 195,
   },
 ]
