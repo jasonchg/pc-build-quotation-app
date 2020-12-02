@@ -26,62 +26,43 @@ const useStyles = makeStyles({
 })
 
 export const HomeScreen = ({ history }) => {
-  let sub = 0
-
   useEffect(() => {
     if (localStorage.getItem('cpu') !== null) {
       let myCpu = JSON.parse(localStorage.getItem('cpu'))
       setCpu(myCpu)
-      sub += myCpu.price
     }
 
     if (localStorage.getItem('cpuCooler') !== null) {
       let myCpuCooler = JSON.parse(localStorage.getItem('cpuCooler'))
       setCpuCooler(myCpuCooler)
-      sub += myCpuCooler.price
     }
-
     if (localStorage.getItem('motherboard') !== null) {
       let myMotherboard = JSON.parse(localStorage.getItem('motherboard'))
       setMotherboard(myMotherboard)
-      sub += myMotherboard.price
     }
-
     if (localStorage.getItem('memory') !== null) {
       let myMemory = JSON.parse(localStorage.getItem('memory'))
       setMemory(myMemory)
-      sub += myMemory.price
     }
-
     if (localStorage.getItem('storage') !== null) {
       let myStorage = JSON.parse(localStorage.getItem('storage'))
       setStorage(myStorage)
-      sub += myStorage.price
     }
-
     if (localStorage.getItem('video-card') !== null) {
       let myVideoCard = JSON.parse(localStorage.getItem('video-card'))
       setVideoCard(myVideoCard)
-      sub += myVideoCard.price
     }
-
     if (localStorage.getItem('casing') !== null) {
       let myCasing = JSON.parse(localStorage.getItem('casing'))
       setCasing(myCasing)
-      sub += myCasing.price
     }
-
     if (localStorage.getItem('power-supply') !== null) {
       let myPowerSupply = JSON.parse(localStorage.getItem('power-supply'))
       setPowerSupply(myPowerSupply)
-      sub += myPowerSupply.price
     }
-
-    history.push('/')
-  }, [localStorage])
+  }, [])
 
   const styleMe = useStyles()
-
   const [cpu, setCpu] = useState(null)
   const [cpuCooler, setCpuCooler] = useState(null)
   const [motherboard, setMotherboard] = useState(null)
@@ -90,6 +71,17 @@ export const HomeScreen = ({ history }) => {
   const [videoCard, setVideoCard] = useState(null)
   const [casing, setCasing] = useState(null)
   const [powerSupply, setPowerSupply] = useState(null)
+
+  let sub = 0
+  sub =
+    Number(cpu ? cpu.price : 0) +
+    Number(cpuCooler ? cpuCooler.price : 0) +
+    Number(motherboard ? motherboard.price : 0) +
+    Number(memory ? memory.price : 0) +
+    Number(storage ? storage.price : 0) +
+    Number(videoCard ? videoCard.price : 0) +
+    Number(casing ? casing.price : 0) +
+    Number(powerSupply ? powerSupply.price : 0)
 
   return (
     <Container maxWidth='md' className={styleMe.root}>
