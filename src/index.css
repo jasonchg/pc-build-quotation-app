@@ -24,10 +24,31 @@ main {
   min-height: 70vh;
 }
 
+.totalSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 120px;
+}
+
+@media print {
+  body,
+  main,
+  .noprint,
+  header,
+  footer {
+    display: none;
+  }
+  .printArea,
+  body,
+  main {
+    display: block;
+  }
 }

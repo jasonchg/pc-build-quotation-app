@@ -27,6 +27,14 @@ const useStyles = makeStyles({
 
 export const HomeScreen = ({ history }) => {
   useEffect(() => {
+    if (localStorage.getItem('myPcBuild') !== null) {
+      localStorage.removeItem('myPcBuild')
+    }
+
+    if (localStorage.getItem('myName') !== null) {
+      setMyName(localStorage.getItem('myName'))
+    }
+
     if (localStorage.getItem('cpu') !== null) {
       let myCpu = JSON.parse(localStorage.getItem('cpu'))
       setCpu(myCpu)
@@ -71,6 +79,7 @@ export const HomeScreen = ({ history }) => {
   const [videoCard, setVideoCard] = useState(null)
   const [casing, setCasing] = useState(null)
   const [powerSupply, setPowerSupply] = useState(null)
+  const [myName, setMyName] = useState('Unknown')
 
   let sub = 0
   sub =
@@ -82,6 +91,41 @@ export const HomeScreen = ({ history }) => {
     Number(videoCard ? videoCard.price : 0) +
     Number(casing ? casing.price : 0) +
     Number(powerSupply ? powerSupply.price : 0)
+
+  const saveThisRigs = () => {
+    if (
+      localStorage.getItem('cpu') === null ||
+      localStorage.getItem('cpuCooler') === null ||
+      localStorage.getItem('motherboard') === null ||
+      localStorage.getItem('memory') === null ||
+      localStorage.getItem('storage') === null ||
+      localStorage.getItem('video-card') === null ||
+      localStorage.getItem('casing') === null ||
+      localStorage.getItem('power-supply') === null
+    ) {
+      alert('Please complete full setup to save.')
+      localStorage.removeItem('myPcBuild')
+    } else {
+      alert('saved!')
+      let fullPcBuild = {
+        total: sub,
+        myName,
+        components: [
+          cpu,
+          cpuCooler,
+          motherboard,
+          memory,
+          storage,
+          videoCard,
+          casing,
+          powerSupply,
+        ],
+      }
+      localStorage.setItem('myName', String(myName))
+      localStorage.setItem('myPcBuild', JSON.stringify(fullPcBuild))
+      history.push('/done')
+    }
+  }
 
   return (
     <Container maxWidth='md' className={styleMe.root}>
@@ -378,7 +422,28 @@ export const HomeScreen = ({ history }) => {
         </TableContainer>
       </>
 
-      <h1 style={{ textAlign: 'right' }}>Sub Total: RM{sub}</h1>
+      <div className='totalSection'>
+        <div>
+          Your Name:
+          <input
+            type='text'
+            value={myName}
+            onChange={(e) => setMyName(e.target.value)}
+          />
+          <Button
+            style={{ marginLeft: 10 }}
+            onClick={() => saveThisRigs()}
+            variant='contained'
+            color='primary'
+            size='small'
+          >
+            Save this Rigs
+          </Button>
+        </div>
+        <div>
+          <h1>Sub Total: RM{sub}</h1>
+        </div>
+      </div>
     </Container>
   )
 }

@@ -15,7 +15,7 @@ function App() {
       <main>
         <Switch>
           <Route path='/product' component={ProductSelectScreen} />
-          <Route path='/quote' component={DoneScreen} />
+          <Route path='/done' component={DoneScreen} />
           <Route path='/' component={HomeScreen} />
         </Switch>
       </main>
